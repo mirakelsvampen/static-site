@@ -44,11 +44,11 @@ resource "azurerm_storage_account" "staticcontent" {
   }
 
   static_website {
-    index_document = "home.html"
+    index_document = "index.html"
   }
 
   tags = {
-    environment = "staging"
+    environment = "live"
   }
 
 }

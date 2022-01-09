@@ -43,7 +43,7 @@ about_md_obj = markdown(
 )
 
 data = {
-    x: posts[x] for x in sorted(posts, key=date_sort_func)
+    x: posts[x] for x in sorted(posts, key=date_sort_func) if x != "about-page"
 }
 
 # Render landing page
