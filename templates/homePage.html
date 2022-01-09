@@ -2,19 +2,15 @@
 
 {% block content %}
 
-<h1>Articles</h1>
-
+<h3>Articles</h3>
 <div>
-
-{% for post in posts.values() %}
-
-    <p>
-        <h2>{{loop.index}}: <a href="posts/{{ post.slug }}.html">{{post.title}}</a> <small>{{post.date}}</small></h2>
-        {{post.summary}}
-    </p>
-
-{% endfor %}
-
+    {% for post in posts.values() %}
+    <div class="section">
+        <h5><a class="black-text" href="posts/{{ post.slug }}.html">{{post.title}}</h5>
+        <p>{{post.date}} - {{post.summary}}</p>
+    </div>
+    <div class="divider teal accent-1"></div>
+    {% endfor %}
 </div>
 
 {% endblock %}

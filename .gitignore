@@ -1,0 +1,6 @@
+# Terraform
+*.tfvars
+*.tfstate
+*.tfstate.backup
+*.hcl
+.terraform

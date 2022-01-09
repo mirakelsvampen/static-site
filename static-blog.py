@@ -15,6 +15,7 @@ env = Environment(
 active_articles = os.listdir(CONTENT_FOLDER)
 homepage = env.get_template('homePage.html')
 postpage = env.get_template('postPage.html')
+aboutpage = env.get_template('aboutPage.html')
 
 posts = dict()
 date_sort_func = lambda x: datetime.strptime(posts[x]['date'], '%Y-%m-%d') 
@@ -36,12 +37,24 @@ for article_file in active_articles:
         'content': md_obj
     }
 
+about_md_obj = markdown(
+    open(f'{CONTENT_FOLDER}/about.md', 'r').read(),
+    extras=['metadata']
+)
+
 data = {
     x: posts[x] for x in sorted(posts, key=date_sort_func)
 }
 
+# Render landing page
 with open(f'{OUT_FOLDER}/index.html', 'w+') as index_file:
     index_file.write(homepage.render(posts=data))
-    for post, content in data.items():
-        with open(f'{OUT_FOLDER}/posts/{post}.html', 'w+') as post_file:
-            post_file.write(postpage.render(post=content))
+
+# Render posts
+for post, content in data.items():
+    with open(f'{OUT_FOLDER}/posts/{post}.html', 'w+') as post_file:
+        post_file.write(postpage.render(post=content))
+
+# Render about page
+with open(f'{OUT_FOLDER}/about.html', 'w+') as about_file:
+    about_file.write(aboutpage.render(content=about_md_obj))
