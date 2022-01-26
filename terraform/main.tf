@@ -19,6 +19,8 @@ resource "azurerm_cdn_endpoint" "staticcontent" {
   profile_name        = azurerm_cdn_profile.staticcontent.name
   location            = azurerm_resource_group.staticcontent.location
   resource_group_name = azurerm_resource_group.staticcontent.name
+  is_http_allowed     = false
+  is_https_allowed    = true
 
   origin_host_header = azurerm_storage_account.staticcontent.primary_web_host
 
