@@ -40,6 +40,10 @@ resource "azurerm_storage_account" "staticcontent" {
   min_tls_version           = "TLS1_2"
   allow_blob_public_access  = false
 
+  network_rules {
+    bypass = ["Azure Services"]
+  }
+
   custom_domain {
     name = "tech.${var.site_domain}"
     use_subdomain = true
